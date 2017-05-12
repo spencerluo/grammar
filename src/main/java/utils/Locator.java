@@ -18,7 +18,7 @@ public class Locator {
 	
 	public static void init() throws ParserConfigurationException, Exception, IOException{
 		DocumentBuilder db=DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		dom=db.parse(new File("document\\element.xml"));
+		dom=db.parse(new File("config\\element.xml"));
 	}
 
 	public static By getLocator(String pageName, String objectName) throws Exception {
@@ -44,7 +44,7 @@ public class Locator {
 			type = object.getAttributes().getNamedItem("type").getNodeValue();
 			value = object.getAttributes().getNamedItem("value").getNodeValue();
 		} catch (Exception e) {
-			Log.error("no such object"+objectName);
+			Log.error("no such object "+objectName);
 			throw(e);
 		}
 		By by = null;

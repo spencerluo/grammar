@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -47,7 +49,7 @@ public class Actions {
 		Log.info("open "+browser+" browser");
 	}
 	
-	public static void getUrl(String url) throws Exception{
+	public static void navigate(String url) throws Exception{
 		try {
 			driver.get(url);
 			Log.info("navigate to ["+url+"]");
@@ -83,6 +85,23 @@ public class Actions {
 		click(pageName, objectName);
 	}
 	
+	public static void clickAndSwitch(String pageName, String objectName) throws Exception{
+		String currentHandle = getDriver().getWindowHandle();
+		click(pageName, objectName);
+		Set<String> handles = driver.getWindowHandles();
+		for(String handle: handles){
+			if(!handle.equals(currentHandle)){
+				driver.switchTo().window(handle);
+				break;
+			}
+		}
+	}
+	
+	public static void clickByXpath(String xpath){
+		new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+		driver.findElement(By.xpath(xpath)).click();
+	}
+
 	public static void clear(String pageName, String objectName) throws Exception{
 		try {
 			getElement(pageName, objectName).clear();
@@ -152,5 +171,22 @@ public class Actions {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
 		String s=sdf.format(date);
 		return s;
+	}
+	
+	public static String getText(String pageName, String objectName) throws Exception{
+		String text = null;
+		try {
+			WebElement element = getElement(pageName, objectName);
+			text = element.getText();
+			Log.info("get  the "+text+" from ["+objectName+"] in ["+pageName+"]");
+		} catch (Exception e) {
+			Log.error("can't get  the text from ["+objectName+"] in ["+pageName+"]");
+			throw new Exception("can't get  the text from  ["+objectName+"] in ["+pageName+"]");
+		}
+		return text;
+	}
+	
+	public static void waitElement(String pageName, String objectName) throws Exception{
+		new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(Locator.getLocator(pageName, objectName)));
 	}
 }

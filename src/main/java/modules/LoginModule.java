@@ -6,9 +6,12 @@ public class LoginModule {
 
 	public static void login() throws Exception {
 
-		getUrl("http://study-miniblog-new.qa.netease.com/login");
-		sendKeys("LoginPage", "Username", "spencer");
-		sendKeys("LoginPage", "Password", "asdD1234");
-		click("LoginPage", "Submit");
+		navigate("http://portal.olavoice.com/open/website/login/login_show");
+		sendKeys("loginPage", "username", "spencer");
+		sendKeys("loginPage", "password", "asdD1234");
+		sendKeys("loginPage", "yanzhengma", "abcd");
+		click("loginPage", "submit");
+		waitAndClick("loginPage", "user");
+		clickAndSwitch("loginPage", "nli");
 	}
 }

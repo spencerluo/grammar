@@ -3,8 +3,7 @@
 <suite name="Suite">
   <test name="GrammarEdit">
     <classes>
-      <class name="testcases.MyTest"/>
-      <class name="testcases.NewTest"/>
+      <class name="testcases.TestRule"/>
     </classes>
   </test>
   <listeners>
