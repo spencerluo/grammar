@@ -18,7 +18,7 @@ public class Locator {
 	
 	public static void init() throws ParserConfigurationException, Exception, IOException{
 		DocumentBuilder db=DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		dom=db.parse(new File("config\\element.xml"));
+		dom=db.parse(new File("config/element.xml"));
 	}
 
 	public static By getLocator(String pageName, String objectName) throws Exception {
