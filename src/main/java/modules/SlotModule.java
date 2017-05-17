@@ -2,9 +2,9 @@ package modules;
 
 import static utils.Actions.*;
 
-import org.openqa.selenium.By;
+import org.testng.Assert;
 
-import junit.framework.Assert;
+
 
 public class SlotModule {
 

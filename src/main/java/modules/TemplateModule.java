@@ -8,7 +8,8 @@ import static utils.Actions.sendKeys;
 import static utils.Actions.waitAndClick;
 import static utils.Actions.waitElement;
 
-import junit.framework.Assert;
+import org.testng.Assert;
+
 
 public class TemplateModule {
 
