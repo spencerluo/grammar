@@ -2,9 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
   <test name="GrammarEdit">
-    <classes>
-      <class name="testcases.TestRule"/>
-    </classes>
+      <packages>
+          <package name="testcases"></package>
+      </packages>
   </test>
   <listeners>
 		<listener class-name="org.uncommons.reportng.HTMLReporter"></listener>

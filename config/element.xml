@@ -106,6 +106,7 @@
 			value='//*[@id="layui-layer2"]/div[3]/a' />
 		<closeDeleteNotice type="xpath"
 			value='//*[@id="layui-layer3"]/div[3]/a' />
+		<deleteMsg type="xpath" value='//*[@id="appdeleteResultDialog"]/div[2]/div[1]/p' />
 		<enterApp type="id" value="enterApp" />
 	</modelPage>
 	<mainPage>
