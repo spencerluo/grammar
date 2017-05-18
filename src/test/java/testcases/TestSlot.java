@@ -37,6 +37,6 @@ public class TestSlot {
 
 	@DataProvider
 	public Object[][] dp() throws Exception {
-		return new ReadExcel("config/grammar.xlsx", "slot").getData();
+		return new ReadExcel(System.getProperty("user.dir")+"\\config\\grammar.xlsx", "slot").getData();
 	}
 }

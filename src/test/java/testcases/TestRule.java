@@ -39,7 +39,7 @@ public class TestRule {
 
 	@DataProvider
 	public Object[][] dp() throws Exception {
-		return new ReadExcel("config/grammar.xlsx","rule").getData();
+		return new ReadExcel(System.getProperty("user.dir")+"\\config\\grammar.xlsx","rule").getData();
 	}
 	
 

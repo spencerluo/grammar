@@ -35,7 +35,7 @@ public class TestApp {
 
 	@DataProvider
 	public Object[][] dp() throws Exception {
-		return new ReadExcel("config/grammar.xlsx","app").getData();
+		return new ReadExcel(System.getProperty("user.dir")+"\\config\\grammar.xlsx","app").getData();
 	}
 	
 }
