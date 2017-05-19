@@ -15,7 +15,8 @@ public class AppModule {
 		waitElement("modelPage","closeAddNotice");
 		try {
 			if (msg != null) {
-				Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+				String result = getText("mainPage", "subMsg");
+				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 			} 
 		} finally {
 			click("modelPage","closeAddNotice");
@@ -43,7 +44,8 @@ public class AppModule {
 		waitElement("modelPage","closeDeleteNotice");
 		try {
 			if (msg != null) {
-				Assert.assertTrue(getText("modelPage", "deleteMsg").contains(msg));
+				String result = getText("modelPage", "deleteMsg");
+				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 			} 
 		} finally {
 			click("modelPage","closeDeleteNotice");

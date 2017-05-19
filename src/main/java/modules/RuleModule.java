@@ -22,7 +22,8 @@ public class RuleModule {
 		waitElement("mainPage", "subMsgClose");
 		try {
 			if (msg != null) {
-				Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+				String result = getText("mainPage", "subMsg");
+				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 			} 
 		} finally {
 			click("mainPage", "subMsgClose");
@@ -42,8 +43,8 @@ public class RuleModule {
 		click("rulePage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		try {
-//			System.out.println( getText("mainPage", "subMsg"));
-			Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("mainPage", "subMsgClose");
 		}
@@ -56,7 +57,8 @@ public class RuleModule {
 		click("rulePage", "submit");
 		waitElement("rulePage", "deleteMsgClose");
 		try {
-			Assert.assertTrue(getText("rulePage", "deleteMsg").contains(msg));
+			String result = getText("rulePage", "deleteMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("rulePage", "deleteMsgClose");
 		}

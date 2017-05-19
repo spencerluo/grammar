@@ -24,7 +24,8 @@ public class SlotModule {
 		waitElement("mainPage", "subMsgClose");
 		try {
 			if (msg != null) {
-				Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+				String result = getText("mainPage", "subMsg");
+				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 			} 
 		} finally {
 			click("mainPage", "subMsgClose");
@@ -50,7 +51,8 @@ public class SlotModule {
 		click("slotPage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		try {
-			Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("mainPage", "subMsgClose");
 		}
@@ -63,7 +65,8 @@ public class SlotModule {
 		click("slotPage", "submit");
 		waitElement("slotPage", "deleteMsgClose");
 		try {
-			Assert.assertTrue(getText("slotPage", "deleteMsg").contains(msg));
+			String result = getText("slotPage", "deleteMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("slotPage", "deleteMsgClose");
 		}

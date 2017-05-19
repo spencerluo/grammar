@@ -15,7 +15,7 @@ import utils.ReadExcel;
 
 public class TestSlot {
 	@Test(dataProvider = "dp")
-	public void testSlot(String function, String action, String caseName, String test) throws Exception {
+	public void testSlot(String caseName, String function, String action, String test) throws Exception {
 		process(function, action, test);
 	}
 

@@ -29,7 +29,9 @@ public class GrammarModule {
 		waitElement("mainPage", "subMsgClose");
 		try {
 			if (msg != null) {
-				Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+				String result = getText("mainPage", "subMsg");
+				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
+				
 			} 
 		} finally {
 			click("mainPage", "subMsgClose");
@@ -57,7 +59,8 @@ public class GrammarModule {
 		waitElement("grammarPage", "submitChange");
 		try {
 			if (msg != null) {
-				Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+				String result = getText("mainPage", "subMsg");
+				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 			} 
 		} finally {
 			click("grammarPage", "submitChange");
@@ -78,7 +81,8 @@ public class GrammarModule {
 		click("grammarPage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		try {
-			Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("mainPage", "subMsgClose");
 			Thread.sleep(2000);
@@ -99,7 +103,8 @@ public class GrammarModule {
 		click("grammarPage", "submit");
 		waitElement("grammarPage", "submitChange");
 		try {
-			Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("grammarPage", "submitChange");
 			Thread.sleep(5000);
@@ -113,10 +118,16 @@ public class GrammarModule {
 		waitAndClick("grammarPage", "deleteSubmit");
 		waitElement("grammarPage", "deleteMsgClose");
 		try {
-			Assert.assertTrue(getText("grammarPage", "deleteMsg").contains(msg));
+			String result = getText("grammarPage", "deleteMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("grammarPage", "deleteMsgClose");
 			Thread.sleep(2000);
 		}
+	}
+	
+	public static void deleteCorpus(String name, String msg) throws Exception{
+		waitAndClick("mainPage", "corpus");
+		
 	}
 }

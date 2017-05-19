@@ -155,12 +155,12 @@ public class Actions {
 		return driver.getTitle();
 	}
 	
-	public static void takeScreenShot(){
+	public static void takeScreenShot(String name){
 		TakesScreenshot tss=(TakesScreenshot)driver;
 		File file = tss.getScreenshotAs(OutputType.FILE);
 		String date = getDate();
 		try {
-			FileUtils.copyFile(file, new File("photos\\"+date+".png"));
+			FileUtils.copyFile(file, new File("photos\\"+name+"_"+date+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

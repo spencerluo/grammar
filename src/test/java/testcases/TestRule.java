@@ -18,7 +18,7 @@ import utils.ReadExcel;
 public class TestRule {
 
 @Test(dataProvider = "dp")
-  public void testRule(String function, String action, String caseName, String test) throws Exception {
+  public void testRule(String caseName, String function, String action, String test) throws Exception {
 	process(function, action, test);
   }
   

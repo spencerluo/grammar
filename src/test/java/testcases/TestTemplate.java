@@ -17,7 +17,7 @@ import utils.ReadExcel;
 
 public class TestTemplate {
 	@Test(dataProvider = "dp")
-	  public void testTemplate(String function, String action, String caseName, String test) throws Exception {
+	  public void testTemplate(String caseName, String function, String action, String test) throws Exception {
 		process(function, action, test);
 	  }
 	  

@@ -22,7 +22,9 @@ public class TemplateModule {
 		waitElement("mainPage", "subMsgClose");
 		try {
 			if (msg != null) {
-				Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+				String result = getText("mainPage", "subMsg");
+				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
+				
 			} 
 		} finally {
 			click("mainPage", "subMsgClose");
@@ -42,7 +44,8 @@ public class TemplateModule {
 		click("templatePage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		try {
-			Assert.assertTrue(getText("mainPage", "subMsg").contains(msg));
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("mainPage", "subMsgClose");
 		}
@@ -55,7 +58,8 @@ public class TemplateModule {
 		click("templatePage", "submit");
 		waitElement("templatePage", "deleteMsgClose");
 		try {
-			Assert.assertTrue(getText("templatePage", "deleteMsg").contains(msg));
+			String result = getText("templatePage", "deleteMsg");
+			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("templatePage", "deleteMsgClose");
 		}
