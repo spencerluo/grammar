@@ -7,7 +7,7 @@ import static utils.Actions.getText;
 import static utils.Actions.sendKeys;
 import static utils.Actions.waitAndClick;
 import static utils.Actions.waitElement;
-
+import static utils.Actions.navigate;
 import org.testng.Assert;
 
 
@@ -27,16 +27,22 @@ public class GrammarModule {
 		}
 		click("grammarPage", "submit");
 		waitElement("mainPage", "subMsgClose");
+		Thread.sleep(500);
 		try {
 			if (msg != null) {
+				Thread.sleep(200);
 				String result = getText("mainPage", "subMsg");
 				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 				
 			} 
 		} finally {
 			click("mainPage", "subMsgClose");
+			if(!msg.equals("提交成功!")){
+				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+//				navigate("https://cn.olami.ai/open/nli/web/search_grammar");
+			}
+			Thread.sleep(4000);
 		}
-		Thread.sleep(2000);
 	}
 	
 	public static void addGrammar(String name, String content, String corpus, String answer) throws Exception {
@@ -57,14 +63,20 @@ public class GrammarModule {
 		}
 		click("grammarPage", "submit");
 		waitElement("grammarPage", "submitChange");
+		Thread.sleep(500);
+		click("grammarPage", "submitChange");
+		Thread.sleep(1000);
+		waitElement("mainPage", "subMsgClose");
+		Thread.sleep(500);
 		try {
 			if (msg != null) {
+				Thread.sleep(200);
 				String result = getText("mainPage", "subMsg");
 				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 			} 
 		} finally {
-			click("grammarPage", "submitChange");
-			Thread.sleep(5000);
+			click("mainPage", "subMsgClose");
+			Thread.sleep(4000);
 		}
 	}
 
@@ -80,12 +92,18 @@ public class GrammarModule {
 		}
 		click("grammarPage", "submit");
 		waitElement("mainPage", "subMsgClose");
+		Thread.sleep(500);
 		try {
+			Thread.sleep(200);
 			String result = getText("mainPage", "subMsg");
 			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
 			click("mainPage", "subMsgClose");
-			Thread.sleep(2000);
+			if(!msg.equals("提交成功!")){
+				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+//				navigate("https://cn.olami.ai/open/nli/web/search_grammar");
+			}
+			Thread.sleep(4000);
 		}
 	}
 	
@@ -102,12 +120,18 @@ public class GrammarModule {
 		}
 		click("grammarPage", "submit");
 		waitElement("grammarPage", "submitChange");
+		Thread.sleep(500);
+		click("grammarPage", "submitChange");
+		Thread.sleep(1000);
+		waitElement("mainPage", "subMsgClose");
+		Thread.sleep(500);
 		try {
+			Thread.sleep(200);
 			String result = getText("mainPage", "subMsg");
 			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {
-			click("grammarPage", "submitChange");
-			Thread.sleep(5000);
+			click("mainPage", "subMsgClose");
+			Thread.sleep(4000);
 		}
 		
 	}
@@ -115,9 +139,12 @@ public class GrammarModule {
 	public static void deleteGrammar(String name, String msg) throws Exception{
 		waitAndClick("mainPage", "grammar");
 		clickByXpath("//*[@title='"+name+"']/following-sibling::*[4]/img[2]");
+		Thread.sleep(500);
 		waitAndClick("grammarPage", "deleteSubmit");
 		waitElement("grammarPage", "deleteMsgClose");
+		Thread.sleep(500);
 		try {
+			Thread.sleep(2000);
 			String result = getText("grammarPage", "deleteMsg");
 			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
 		} finally {

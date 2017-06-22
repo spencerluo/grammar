@@ -1,7 +1,6 @@
 package testcases;
 
 import static modules.AppModule.createApp;
-import static modules.AppModule.deleteCurrentApp;
 import static modules.AppModule.enterApp;
 import static modules.LoginModule.login;
 import static modules.mainModule.process;

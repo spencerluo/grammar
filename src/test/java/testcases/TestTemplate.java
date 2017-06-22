@@ -1,10 +1,11 @@
 package testcases;
 
 import static modules.AppModule.createApp;
-import static modules.AppModule.deleteCurrentApp;
+import static modules.AppModule.deleteApp;
 import static modules.AppModule.enterApp;
 import static modules.LoginModule.login;
 import static modules.mainModule.process;
+import static utils.Actions.navigate;
 import static utils.Actions.openBrowser;
 import static utils.Actions.quite;
 
@@ -18,7 +19,13 @@ import utils.ReadExcel;
 public class TestTemplate {
 	@Test(dataProvider = "dp")
 	  public void testTemplate(String caseName, String function, String action, String test) throws Exception {
-		process(function, action, test);
+		try {
+			process(function, action, test);
+		} catch (Exception e) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+			Thread.sleep(2000);
+			throw e;
+		}
 	  }
 	  
 		@BeforeClass
@@ -31,7 +38,7 @@ public class TestTemplate {
 
 		@AfterClass
 		public void afterClass() throws Exception {
-			deleteCurrentApp();
+			deleteApp("app5");
 			Thread.sleep(2000);
 			quite();
 		}

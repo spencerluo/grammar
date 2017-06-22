@@ -4,10 +4,17 @@
 		<username type="id" value="username" />
 		<password type="id" value="password" />
 		<yanzhengma type="name" value="vcode" />
-		<submit type="xpath" value='/html/body/div[4]/div[4]/form/div[4]/button' />
+		<submit type="xpath" value='/html/body/div[6]/div[4]/form/div[4]/button' />
 		<user type="xpath"
 			value='//*[@id="bs-example-navbar-collapse-1"]/ul[2]/li[1]/a' />
 		<nli type="linkText" value="NLI 系统" />
+		<应用管理 type="linkText" value="应用管理" />
+		<test type="xpath" value="/html/body/div[6]/div[5]/div/div[3]/div/div[1]/button[2]" />
+		<配置模块 type="xpath" value="/html/body/div[6]/div[5]/div/div[3]/div/div[1]/button[1]" />
+		<configureSubmit type="xpath" value='//*[@id="layui-layer1"]/div[3]/a[1]' />
+		<question type="xpath" value='//*[@id="configApp1"]/form/table/tbody/tr[1]/td[2]/input' />
+		<testSubmit type="xpath" value='//*[@id="btn_test_do"]' />
+		<answer type="xpath" value='//*[@id="test_result"]' />
 	</loginPage>
 	<corpusPage>
 		<deleteFirstCorpus type="xpath"
@@ -15,6 +22,7 @@
 	</corpusPage>
 	<grammarPage>
 		<add type="id" value="grammarAdd" />
+		<cancel type="id" value="cancel" />
 		<name type="xpath" value="//*[@id='grammarBox']/div/div[2]/table/tbody/tr[3]/td[2]/input" />
 		<content type="xpath" value="//*[@id='grammarBox']/div/div[2]/table/tbody/tr[5]/td[2]/textarea"/>
 		<corpus type="xpath" value="//*[@id='grammarBox']/div/div[2]/table/tbody/tr[7]/td[2]/input" />
@@ -40,34 +48,36 @@
 		<content type="xpath"
 			value='//*[@id="ruleBox"]/div/div[1]/table/tbody/tr[5]/td[2]/textarea' />
 		<submit type="xpath" value='//*[contains(@id,"layui-layer")][1]/div[3]/a[2]' />
+		<changeSubmit type="xpath" value='html/body/div[6]/div[2]/div[13]/div[3]/a[2]' />
 		<deleteMsg type="xpath" value='//*[@id="ruledeleteResultDialog"]/div[2]/div[1]/p' />
 		<deleteMsgClose type="xpath" value='html/body/div[6]/div[2]/div[7]/div[3]/a' />
 	</rulePage>
 	<slotPage>
 		<add type="xpath" value='//*[@id="subform"]/div[1]/div[2]/input' />
 		<name type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[2]/td[3]/input' />
+			value='//*[@id="pop_table"]/tbody/tr[3]/td[3]/input' />
 		<datetime type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[3]/div/select/option[1]' />
+			value='//*[@id="pop_table"]/tbody/tr[5]/td[3]/div/select/option[1]' />
 		<timepoint type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[4]/div/select/option[1]' />
-		<timepoint type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[4]/div/select/option[2]' />
+			value='//*[@id="pop_table"]/tbody/tr[5]/td[4]/div/select/option[2]' />
 		<duration type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[4]/div/select/option[3]' />
+			value='//*[@id="pop_table"]/tbody/tr[5]/td[4]/div/select/option[3]' />
 		<internal type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[3]/div/select/option[2]' />
+			value='//*[@id="pop_table"]/tbody/tr[5]/td[3]/div/select/option[2]' />
 		<number type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[3]/div/select/option[3]' />
+			value='//*[@id="pop_table"]/tbody/tr[5]/td[3]/div/select/option[3]' />
 		<float type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[3]/div/select/option[4]' />
+			value='//*[@id="pop_table"]/tbody/tr[5]/td[3]/div/select/option[4]' />
 		<ext type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[4]/td[3]/div/select/option[5]' />
+			value='//*[@id="pop_table"]/tbody/tr[5]/td[3]/div/select/option[5]' />
+		<mainType type="xpath" value='//*[@id="pop_table"]/tbody/tr[5]/td[4]/div/input[1]' />
+		<subType type="xpath" value='//*[@id="pop_table"]/tbody/tr[5]/td[4]/div/input[2]' />
 		<min type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[6]/td[3]/input' />
+			value='//*[@id="pop_table"]/tbody/tr[7]/td[3]/input' />
 		<max type="xpath"
-			value='//*[@id="slotBox"]/div/div/table/tbody/tr[8]/td[3]/input' />
+			value='//*[@id="pop_table"]/tbody/tr[9]/td[3]/input' />
 		<submit type="xpath" value='//*[@id="layui-layer1"]/div[3]/a[2]' />
+		<changeSubmit type="xpath" value='html/body/div[6]/div[2]/div[13]/div[3]/a[2]' />
 		<deleteMsg type="xpath"
 		    value='//*[@id="slotdeleteResultDialog"]/div[2]/div[1]/p' />
 		<deleteMsgClose type="xpath" value='html/body/div[6]/div[2]/div[9]/div[3]/a' />
@@ -75,10 +85,11 @@
 	<templatePage>
 		<add type="xpath" value='//*[@id="subform"]/div[1]/div[2]/input' />
 		<name type="xpath"
-			value='//*[@id="templateBox"]/div/div[1]/table/tbody/tr[2]/td[2]/input' />
+			value='//*[@id="templateBox"]/div/div[1]/table/tbody/tr[3]/td[2]/input' />
 		<content type="xpath"
-			value='//*[@id="templateBox"]/div/div[1]/table/tbody/tr[4]/td[2]/textarea' />
+			value='//*[@id="templateBox"]/div/div[1]/table/tbody/tr[5]/td[2]/textarea' />
 		<submit type="xpath" value='//*[@id="layui-layer1"]/div[3]/a[2]' />
+		<changeSubmit type="xpath" value='html/body/div[6]/div[2]/div[13]/div[3]/a[2]' />
 		<deleteMsg type="xpath" value='//*[@id="templatedeleteResultDialog"]/div[2]/div[1]/p' />
 		<deleteMsgClose type="xpath" value='html/body/div[6]/div[2]/div[11]/div[3]/a' />
 	</templatePage>
@@ -90,13 +101,13 @@
 	</testPage>
 	<releasePage>
 		<release type="xpath" value='//*[@id="subform"]/div/div/input' />
+		<subMsgClose type="xpath" value='//*[@id="layui-layer1"]/div[3]/a' />
 	</releasePage>
 	<modelPage>
-		<add type="xpath" value='//*[@id="subform"]/div[1]/div[3]/input[4]' />
-		<import type="xpath" value='//*[@value="导入"]' />
-		<delete type="xpath" value='//*[@id="deleteapp"]' />
-		<deleteNoticeYes type="xpath"
-			value='//*[@id="layui-layer2"]/div[3]/a[2]' />
+		<add type="xpath" value='//*[@id="subform"]/div[1]/div[3]/input[3]' />
+		<import type="xpath" value='//*[@id="import"]' />
+		<delete type="xpath" value='html/body/div[9]/div/div[7]/div[3]/a[2]' />
+		<deleteTwice type="xpath" value='html/body/div[9]/div/div[8]/div[3]/a[2]' />
 		<importAppName type="xpath"
 			value='//*[@id="importappnameBox"]/div/div[1]/table/tbody/tr[1]/td[2]/input' />
 		<addAppName type="xpath"
@@ -110,13 +121,13 @@
 		<enterApp type="id" value="enterApp" />
 	</modelPage>
 	<mainPage>
-		<corpus type="linkText" value='例句库 ' />
+		<corpus type="linkText" value='例句库' />
 		<grammar type="linkText" value='grammar' />
 		<rule type="linkText" value='rule' />
 		<slot type="linkText" value='slot' />
 		<template type="linkText" value='template' />
-		<test type="linkText" value='测试 ' />
-		<release type="linkText" value='发布 ' />
+		<test type="linkText" value='测试' />
+		<release type="linkText" value='发布' />
 		<changeApp type="xpath"
 			value='/html/body/div[6]/div[1]/div[1]/nav/div[2]/div[2]/span[2]' />
 		<user type="xpath" value='/html/body/div[3]/div[1]/div[2]/ul/li/a/img' />

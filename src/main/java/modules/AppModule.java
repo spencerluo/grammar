@@ -27,20 +27,12 @@ public class AppModule {
 		createApp(appName, null);
 	}
 	
-	public static void deleteCurrentApp() throws Exception {
-		waitAndClick("mainPage", "changeApp");
-		waitAndClick("modelPage", "delete");
-		waitAndClick("modelPage", "submit");
-		waitAndClick("modelPage", "deleteNoticeYes");
-		waitAndClick("modelPage","closeDeleteNotice");
-	}
 	
 	public static void deleteApp(String appName, String msg) throws Exception{
 		waitAndClick("mainPage", "changeApp");
-		clickByXpath("//*[@value='"+appName+"']");
+		clickByXpath("//*[@value='"+appName+"']/following-sibling::*/a[1]");
 		waitAndClick("modelPage", "delete");
-		waitAndClick("modelPage", "submit");
-		waitAndClick("modelPage", "deleteNoticeYes");
+		waitAndClick("modelPage", "deleteTwice");
 		waitElement("modelPage","closeDeleteNotice");
 		try {
 			if (msg != null) {
@@ -52,8 +44,11 @@ public class AppModule {
 		}
 	}
 	
+	public static void deleteApp(String appName) throws Exception{
+		deleteApp(appName, null);
+	}
+	
 	public static void enterApp(String appName) throws Exception {
-		clickByXpath("//*[@value='"+appName+"']");
-		waitAndClick("modelPage", "enterApp");
+		clickByXpath("//*[@value='"+appName+"']/following-sibling::*/a[2]");
 	}
 }

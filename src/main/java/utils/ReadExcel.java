@@ -71,7 +71,11 @@ public class ReadExcel {
 		a:for (int i = 1; i < getrowNum(); i++) {
 			String[] line = new String[getColumnNum()];
 			for (int j = 0; j < getColumnNum(); j++) {
-				line[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+				try {
+					line[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+				} catch (Exception e) {
+					line[j] = String.valueOf((int)sheet.getRow(i).getCell(j).getNumericCellValue());
+				}
 				if(line[0].equals("")){
 					break a;
 				}
