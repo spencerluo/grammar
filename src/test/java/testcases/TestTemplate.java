@@ -38,9 +38,12 @@ public class TestTemplate {
 
 		@AfterClass
 		public void afterClass() throws Exception {
-			deleteApp("app5");
-			Thread.sleep(2000);
-			quite();
+			try {
+				deleteApp("app5");
+				Thread.sleep(2000);
+			} finally {
+				quite();
+			}
 		}
 
 		@DataProvider

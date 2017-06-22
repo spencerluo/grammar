@@ -63,10 +63,13 @@ public class TestGrammar {
 
 	@AfterClass
 	public void afterClass() throws Exception {
-		switchTo();
-		deleteApp("app5");
-		Thread.sleep(2000);
-		quite();
+		try {
+			switchTo();
+			deleteApp("app5");
+			Thread.sleep(2000);
+		} finally {
+			quite();
+		}
 	}
 
 	@DataProvider
