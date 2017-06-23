@@ -21,7 +21,13 @@ public class AppModule {
 	}
 
 	public static void createApp(String appName) throws Exception {
-		createApp(appName, null);
+		try {
+			createApp(appName, null);
+		} catch (Exception e) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+			Thread.sleep(2000);
+			createApp(appName, null);
+		}
 	}
 
 	public static void deleteApp(String appName, String msg) throws Exception {
