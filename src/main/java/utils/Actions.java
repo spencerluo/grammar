@@ -93,6 +93,8 @@ public class Actions {
 	}
 	
 	public static void waitBeClick(String pageName, String objectName) throws Exception {
+		final String page = pageName;
+		final String object = objectName;
 		try {
 			new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
 
@@ -100,7 +102,7 @@ public class Actions {
 				public Boolean apply(WebDriver input) {
 					boolean b =false;
 					try {
-						getElement(pageName, objectName).click();
+						getElement(page, object).click();
 						b = true;
 					} catch (Exception e) {
 					}
