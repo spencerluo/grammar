@@ -4,11 +4,10 @@ import static utils.Actions.*;
 
 import org.testng.Assert;
 
-
-
 public class SlotModule {
 
-	public static void addSlot(String name, String type, String subtype, String min, String max, String msg) throws Exception {
+	public static void addSlot(String name, String type, String subtype, String min, String max, String msg)
+			throws Exception {
 		waitAndClick("mainPage", "slot");
 		waitAndClick("slotPage", "add");
 		sendKeys("slotPage", "name", name);
@@ -23,25 +22,23 @@ public class SlotModule {
 		click("slotPage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		Thread.sleep(500);
-		try {
-			if (msg != null) {
-				String result = getText("mainPage", "subMsg");
-				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-			} 
-		} finally {
-			click("mainPage", "subMsgClose");
-			if(!msg.equals("提交成功!")){
-				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			}
-			Thread.sleep(1000);
+		if (msg != null) {
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		}
+		click("mainPage", "subMsgClose");
+		if (!msg.equals("提交成功!")) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+		}
+		Thread.sleep(1000);
 	}
 
 	public static void addSlot(String name, String type, String subtype, String min, String max) throws Exception {
 		addSlot(name, type, subtype, min, max, null);
 	}
-	
-	public static void addTypeSlot(String name, String type, String mainType, String subType, String msg) throws Exception{
+
+	public static void addTypeSlot(String name, String type, String mainType, String subType, String msg)
+			throws Exception {
 		waitAndClick("mainPage", "slot");
 		waitAndClick("slotPage", "add");
 		sendKeys("slotPage", "name", name);
@@ -53,24 +50,22 @@ public class SlotModule {
 		click("slotPage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		Thread.sleep(500);
-		try {
-			if (msg != null) {
-				String result = getText("mainPage", "subMsg");
-				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-			} 
-		} finally {
-			click("mainPage", "subMsgClose");
-			if(!msg.equals("提交成功!")){
-				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			}
-			Thread.sleep(1000);
+		if (msg != null) {
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		}
+		click("mainPage", "subMsgClose");
+		if (!msg.equals("提交成功!")) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+		}
+		Thread.sleep(1000);
 	}
 
-	public static void changeSlot(String name,String type, String subtype, String min, String max, String msg) throws Exception{
+	public static void changeSlot(String name, String type, String subtype, String min, String max, String msg)
+			throws Exception {
 		waitAndClick("mainPage", "slot");
 		Thread.sleep(1000);
-		clickByXpath("//*[@title='"+name+"']/following-sibling::*[7]/img[1]");
+		clickByXpath("//*[@title='" + name + "']/following-sibling::*[7]/img[1]");
 		click("slotPage", type);
 		if (!subtype.equals("null")) {
 			click("slotPage", subtype);
@@ -82,22 +77,20 @@ public class SlotModule {
 		click("slotPage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		Thread.sleep(500);
-		try {
-			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-		} finally {
-			click("mainPage", "subMsgClose");
-			if(!msg.equals("提交成功!")){
-				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			}
-			Thread.sleep(1000);
+		String result = getText("mainPage", "subMsg");
+		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
+		click("mainPage", "subMsgClose");
+		if (!msg.equals("提交成功!")) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
+		Thread.sleep(1000);
 	}
-	
-	public static void changeChangeSlot(String name,String type, String subtype, String min, String max, String msg) throws Exception{
+
+	public static void changeChangeSlot(String name, String type, String subtype, String min, String max, String msg)
+			throws Exception {
 		waitAndClick("mainPage", "slot");
 		Thread.sleep(1000);
-		clickByXpath("//*[@title='"+name+"']/following-sibling::*[7]/img[1]");
+		clickByXpath("//*[@title='" + name + "']/following-sibling::*[7]/img[1]");
 		click("slotPage", type);
 		if (!subtype.equals("null")) {
 			click("slotPage", subtype);
@@ -113,31 +106,25 @@ public class SlotModule {
 		Thread.sleep(1000);
 		waitElement("mainPage", "subMsgClose");
 		Thread.sleep(500);
-		try {
-			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-		} finally {
-			click("mainPage", "subMsgClose");
-			if(!msg.equals("提交成功!")){
-				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			}
-			Thread.sleep(1000);
+		String result = getText("mainPage", "subMsg");
+		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
+		click("mainPage", "subMsgClose");
+		if (!msg.equals("提交成功!")) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
+		Thread.sleep(1000);
 	}
-	
-	public static void deleteSlot(String name, String msg) throws Exception{
+
+	public static void deleteSlot(String name, String msg) throws Exception {
 		waitAndClick("mainPage", "slot");
 		Thread.sleep(1000);
-		clickByXpath("//*[@title='"+name+"']/following-sibling::*[7]/img[2]");
+		clickByXpath("//*[@title='" + name + "']/following-sibling::*[7]/img[2]");
 		click("slotPage", "submit");
 		waitElement("slotPage", "deleteMsgClose");
 		Thread.sleep(500);
-		try {
-			String result = getText("slotPage", "deleteMsg");
-			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-		} finally {
-			click("slotPage", "deleteMsgClose");
-			Thread.sleep(1000);
-		}
+		String result = getText("slotPage", "deleteMsg");
+		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
+		click("slotPage", "deleteMsgClose");
+		Thread.sleep(1000);
 	}
 }

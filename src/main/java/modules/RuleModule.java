@@ -11,7 +11,6 @@ import static utils.Actions.waitElement;
 
 import org.testng.Assert;
 
-
 public class RuleModule {
 
 	public static void addRule(String name, String content, String msg) throws Exception {
@@ -22,49 +21,43 @@ public class RuleModule {
 		click("rulePage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		Thread.sleep(500);
-		try {
-			if (msg != null) {
-				String result = getText("mainPage", "subMsg");
-				Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-			} 
-		} finally {
-			click("mainPage", "subMsgClose");
-			if(!msg.equals("提交成功!")){
-				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			}
-			Thread.sleep(1000);
+		if (msg != null) {
+			String result = getText("mainPage", "subMsg");
+			Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		}
+		click("mainPage", "subMsgClose");
+		if (!msg.equals("提交成功!")) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+		}
+		Thread.sleep(1000);
 	}
-	
+
 	public static void addRule(String name, String content) throws Exception {
 		addRule(name, content, null);
 	}
 
-	public static void changeRule(String name, String content, String msg) throws Exception{
+	public static void changeRule(String name, String content, String msg) throws Exception {
 		waitAndClick("mainPage", "rule");
 		Thread.sleep(1000);
-		clickByXpath("//*[@title='"+name+"']/following-sibling::*[3]/img[1]");
+		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[1]");
 		clear("rulePage", "content");
 		sendKeys("rulePage", "content", content);
 		click("rulePage", "submit");
 		waitElement("mainPage", "subMsgClose");
 		Thread.sleep(500);
-		try {
-			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-		} finally {
-			click("mainPage", "subMsgClose");
-			if(!msg.equals("提交成功!")){
-				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			}
-			Thread.sleep(1000);
+		String result = getText("mainPage", "subMsg");
+		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
+		click("mainPage", "subMsgClose");
+		if (!msg.equals("提交成功!")) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
+		Thread.sleep(1000);
 	}
-	
-	public static void changeChangeRule(String name, String content, String msg) throws Exception{
+
+	public static void changeChangeRule(String name, String content, String msg) throws Exception {
 		waitAndClick("mainPage", "rule");
 		Thread.sleep(1000);
-		clickByXpath("//*[@title='"+name+"']/following-sibling::*[3]/img[1]");
+		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[1]");
 		clear("rulePage", "content");
 		sendKeys("rulePage", "content", content);
 		click("rulePage", "submit");
@@ -74,31 +67,25 @@ public class RuleModule {
 		Thread.sleep(1000);
 		waitElement("mainPage", "subMsgClose");
 		Thread.sleep(500);
-		try {
-			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-		} finally {
-			click("mainPage", "subMsgClose");
-			if(!msg.equals("提交成功!")){
-				navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			}
-			Thread.sleep(1000);
+		String result = getText("mainPage", "subMsg");
+		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
+		click("mainPage", "subMsgClose");
+		if (!msg.equals("提交成功!")) {
+			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
+		Thread.sleep(1000);
 	}
-	
-	public static void deleteRule(String name, String msg) throws Exception{
+
+	public static void deleteRule(String name, String msg) throws Exception {
 		waitAndClick("mainPage", "rule");
 		Thread.sleep(1000);
-		clickByXpath("//*[@title='"+name+"']/following-sibling::*[3]/img[2]");
+		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[2]");
 		click("rulePage", "submit");
 		waitElement("rulePage", "deleteMsgClose");
 		Thread.sleep(500);
-		try {
-			String result = getText("rulePage", "deleteMsg");
-			Assert.assertTrue(result.contains(msg),"expect ["+msg+"] but ["+result+"]");
-		} finally {
-			click("rulePage", "deleteMsgClose");
-			Thread.sleep(1000);
-		}
+		String result = getText("rulePage", "deleteMsg");
+		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
+		click("rulePage", "deleteMsgClose");
+		Thread.sleep(1000);
 	}
 }

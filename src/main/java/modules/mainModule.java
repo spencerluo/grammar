@@ -152,5 +152,6 @@ public class mainModule {
 		click("mainPage", "release");
 		click("releasePage", "release");
 		waitAndClick("releasePage", "subMsgClose");
+		Thread.sleep(1000);
 	}
 }
