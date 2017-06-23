@@ -149,7 +149,7 @@ public class mainModule {
 	}
 	
 	public static void release() throws Exception{
-		click("mainPage", "release");
+		waitBeClick("mainPage", "release");
 		click("releasePage", "release");
 		waitAndClick("releasePage", "subMsgClose");
 		Thread.sleep(1000);

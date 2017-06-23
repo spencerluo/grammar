@@ -7,6 +7,7 @@ import static utils.Actions.getText;
 import static utils.Actions.navigate;
 import static utils.Actions.sendKeys;
 import static utils.Actions.waitAndClick;
+import static utils.Actions.waitBeClick;
 import static utils.Actions.waitElement;
 
 import org.testng.Assert;
@@ -14,7 +15,7 @@ import org.testng.Assert;
 public class RuleModule {
 
 	public static void addRule(String name, String content, String msg) throws Exception {
-		waitAndClick("mainPage", "rule");
+		waitBeClick("mainPage", "rule");
 		waitAndClick("rulePage", "add");
 		sendKeys("rulePage", "name", name);
 		sendKeys("rulePage", "content", content);
@@ -29,7 +30,7 @@ public class RuleModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void addRule(String name, String content) throws Exception {
@@ -37,7 +38,7 @@ public class RuleModule {
 	}
 
 	public static void changeRule(String name, String content, String msg) throws Exception {
-		waitAndClick("mainPage", "rule");
+		waitBeClick("mainPage", "rule");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[1]");
 		clear("rulePage", "content");
@@ -51,11 +52,11 @@ public class RuleModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void changeChangeRule(String name, String content, String msg) throws Exception {
-		waitAndClick("mainPage", "rule");
+		waitBeClick("mainPage", "rule");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[1]");
 		clear("rulePage", "content");
@@ -73,11 +74,11 @@ public class RuleModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void deleteRule(String name, String msg) throws Exception {
-		waitAndClick("mainPage", "rule");
+		waitBeClick("mainPage", "rule");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[2]");
 		click("rulePage", "submit");
@@ -86,6 +87,6 @@ public class RuleModule {
 		String result = getText("rulePage", "deleteMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		click("rulePage", "deleteMsgClose");
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 }

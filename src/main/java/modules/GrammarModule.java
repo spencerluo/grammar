@@ -6,6 +6,7 @@ import static utils.Actions.clickByXpath;
 import static utils.Actions.getText;
 import static utils.Actions.sendKeys;
 import static utils.Actions.waitAndClick;
+import static utils.Actions.waitBeClick;
 import static utils.Actions.waitElement;
 import static utils.Actions.navigate;
 import org.testng.Assert;
@@ -14,7 +15,7 @@ public class GrammarModule {
 
 	public static void addGrammar(String name, String content, String corpus, String answer, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "grammar");
+		waitBeClick("mainPage", "grammar");
 		waitAndClick("grammarPage", "add");
 		sendKeys("grammarPage", "name", name);
 		sendKeys("grammarPage", "content", content);
@@ -38,7 +39,7 @@ public class GrammarModule {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			// navigate("https://cn.olami.ai/open/nli/web/search_grammar");
 		}
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
 	}
 
 	public static void addGrammar(String name, String content, String corpus, String answer) throws Exception {
@@ -47,7 +48,7 @@ public class GrammarModule {
 
 	public static void addChangeGrammar(String name, String content, String corpus, String answer, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "grammar");
+		waitBeClick("mainPage", "grammar");
 		waitAndClick("grammarPage", "add");
 		sendKeys("grammarPage", "name", name);
 		sendKeys("grammarPage", "content", content);
@@ -70,12 +71,12 @@ public class GrammarModule {
 			Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		}
 		click("mainPage", "subMsgClose");
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
 	}
 
 	public static void changeGrammar(String name, String content, String corpus, String answer, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "grammar");
+		waitBeClick("mainPage", "grammar");
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[4]/img[1]");
 		clear("grammarPage", "content");
 		sendKeys("grammarPage", "content", content);
@@ -95,12 +96,12 @@ public class GrammarModule {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			// navigate("https://cn.olami.ai/open/nli/web/search_grammar");
 		}
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
 	}
 
 	public static void changeChangeGrammar(String name, String content, String corpus, String answer, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "grammar");
+		waitBeClick("mainPage", "grammar");
 		Thread.sleep(2000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[4]/img[1]");
 		clear("grammarPage", "content");
@@ -121,12 +122,12 @@ public class GrammarModule {
 		String result = getText("mainPage", "subMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		click("mainPage", "subMsgClose");
-		Thread.sleep(4000);
+//		Thread.sleep(4000);
 
 	}
 
 	public static void deleteGrammar(String name, String msg) throws Exception {
-		waitAndClick("mainPage", "grammar");
+		waitBeClick("mainPage", "grammar");
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[4]/img[2]");
 		Thread.sleep(500);
 		waitAndClick("grammarPage", "deleteSubmit");
@@ -136,7 +137,7 @@ public class GrammarModule {
 		String result = getText("grammarPage", "deleteMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		click("grammarPage", "deleteMsgClose");
-		Thread.sleep(2000);
+//		Thread.sleep(2000);
 	}
 
 	public static void deleteCorpus(String name, String msg) throws Exception {

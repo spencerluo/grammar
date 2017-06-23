@@ -7,6 +7,7 @@ import static utils.Actions.getText;
 import static utils.Actions.navigate;
 import static utils.Actions.sendKeys;
 import static utils.Actions.waitAndClick;
+import static utils.Actions.waitBeClick;
 import static utils.Actions.waitElement;
 
 import org.testng.Assert;
@@ -14,7 +15,7 @@ import org.testng.Assert;
 public class TemplateModule {
 
 	public static void addTemplate(String name, String content, String msg) throws Exception {
-		waitAndClick("mainPage", "template");
+		waitBeClick("mainPage", "template");
 		waitAndClick("templatePage", "add");
 		sendKeys("templatePage", "name", name);
 		sendKeys("templatePage", "content", content);
@@ -30,7 +31,7 @@ public class TemplateModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void addTemplate(String name, String content) throws Exception {
@@ -38,7 +39,7 @@ public class TemplateModule {
 	}
 
 	public static void changeTemplate(String name, String content, String msg) throws Exception {
-		waitAndClick("mainPage", "template");
+		waitBeClick("mainPage", "template");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[1]");
 		clear("templatePage", "content");
@@ -52,11 +53,11 @@ public class TemplateModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void changeChangeTemplate(String name, String content, String msg) throws Exception {
-		waitAndClick("mainPage", "template");
+		waitBeClick("mainPage", "template");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[1]");
 		clear("templatePage", "content");
@@ -74,12 +75,12 @@ public class TemplateModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 
 	}
 
 	public static void deleteTemplate(String name, String msg) throws Exception {
-		waitAndClick("mainPage", "template");
+		waitBeClick("mainPage", "template");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[3]/img[2]");
 		click("templatePage", "submit");
@@ -88,7 +89,7 @@ public class TemplateModule {
 		String result = getText("templatePage", "deleteMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		click("templatePage", "deleteMsgClose");
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 }

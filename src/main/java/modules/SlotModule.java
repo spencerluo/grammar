@@ -8,7 +8,7 @@ public class SlotModule {
 
 	public static void addSlot(String name, String type, String subtype, String min, String max, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "slot");
+		waitBeClick("mainPage", "slot");
 		waitAndClick("slotPage", "add");
 		sendKeys("slotPage", "name", name);
 		click("slotPage", type);
@@ -30,7 +30,7 @@ public class SlotModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void addSlot(String name, String type, String subtype, String min, String max) throws Exception {
@@ -39,7 +39,7 @@ public class SlotModule {
 
 	public static void addTypeSlot(String name, String type, String mainType, String subType, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "slot");
+		waitBeClick("mainPage", "slot");
 		waitAndClick("slotPage", "add");
 		sendKeys("slotPage", "name", name);
 		click("slotPage", type);
@@ -58,12 +58,12 @@ public class SlotModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void changeSlot(String name, String type, String subtype, String min, String max, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "slot");
+		waitBeClick("mainPage", "slot");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[7]/img[1]");
 		click("slotPage", type);
@@ -83,12 +83,12 @@ public class SlotModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void changeChangeSlot(String name, String type, String subtype, String min, String max, String msg)
 			throws Exception {
-		waitAndClick("mainPage", "slot");
+		waitBeClick("mainPage", "slot");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[7]/img[1]");
 		click("slotPage", type);
@@ -112,11 +112,11 @@ public class SlotModule {
 		if (!msg.equals("提交成功!")) {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 		}
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 
 	public static void deleteSlot(String name, String msg) throws Exception {
-		waitAndClick("mainPage", "slot");
+		waitBeClick("mainPage", "slot");
 		Thread.sleep(1000);
 		clickByXpath("//*[@title='" + name + "']/following-sibling::*[7]/img[2]");
 		click("slotPage", "submit");
@@ -125,6 +125,6 @@ public class SlotModule {
 		String result = getText("slotPage", "deleteMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		click("slotPage", "deleteMsgClose");
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 	}
 }

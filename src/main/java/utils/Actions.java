@@ -16,6 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -89,6 +90,26 @@ public class Actions {
 			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at 10s");
 		}
 		click(pageName, objectName);
+	}
+	
+	public static void waitBeClick(String pageName, String objectName) throws Exception {
+		try {
+			new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
+
+				@Override
+				public Boolean apply(WebDriver input) {
+					boolean b =false;
+					try {
+						getElement(pageName, objectName).click();
+						b = true;
+					} catch (Exception e) {
+					}
+					return b;
+				}
+			});
+		} catch (Exception e) {
+			throw new Exception("[" + objectName + "] in [" + pageName + "] can't be click at 10s");
+		}
 	}
 
 	public static void clickAndSwitch(String pageName, String objectName) throws Exception {
