@@ -49,7 +49,7 @@ public class TestRule {
 
 	@DataProvider
 	public Object[][] dp() throws Exception {
-		return new ReadExcel("D:\\eclipse-jee-mars-1-win32-x86_64\\workspace\\grammar\\config\\grammar.xlsx","Sheet4").getData();
+		return new ReadExcel("D:\\eclipse-jee-mars-1-win32-x86_64\\workspace\\grammar\\config\\grammar.xlsx","rule").getData();
 	}
 	
 
