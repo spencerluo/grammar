@@ -218,7 +218,11 @@ public class Actions {
 	}
 
 	public static void waitElement(String pageName, String objectName) throws Exception {
-		new WebDriverWait(driver, 10)
-				.until(ExpectedConditions.presenceOfElementLocated(Locator.getLocator(pageName, objectName)));
+		try {
+			new WebDriverWait(driver, 10)
+					.until(ExpectedConditions.presenceOfElementLocated(Locator.getLocator(pageName, objectName)));
+		} catch (Exception e) {
+			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at 10s");
+		}
 	}
 }
