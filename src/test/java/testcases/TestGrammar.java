@@ -38,7 +38,7 @@ public class TestGrammar {
 		release();
 		switchTo();
 		waitAndClick("loginPage", "user");
-		click("loginPage", "应用管理");
+		waitAndClick("loginPage", "应用管理");
 		configureModules("app5");
 		waitAndClick("loginPage", "test");
 	}
