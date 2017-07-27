@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +38,7 @@ public class Actions {
 		case "chrome":
 			driver = new ChromeDriver();
 			break;
-		case "IE":
+		case "ie":
 			DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
 			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 			caps.setCapability("ignoreZoomSetting", true);
@@ -48,6 +49,7 @@ public class Actions {
 			Log.error("no such Browser");
 			throw new Exception("not such browser");
 		}
+		driver.manage().window().maximize();
 		Log.info("open " + browser + " browser");
 	}
 
@@ -73,8 +75,10 @@ public class Actions {
 	}
 
 	public static void click(String pageName, String objectName) throws Exception {
+		WebElement element = null;
 		try {
-			getElement(pageName, objectName).click();
+			element = getElement(pageName, objectName);
+			element.click();
 			Log.info("click [" + objectName + "] in [" + pageName + "]");
 		} catch (Exception e) {
 			Log.error("can't click [" + objectName + "] in [" + pageName + "]");
@@ -247,5 +251,16 @@ public class Actions {
 		} catch (Exception e) {
 			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at 10s");
 		}
+	}
+	
+	public static void scrollToBase() throws Exception{
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("scroll(0,3000);");
+
+	}
+	
+	public static JavascriptExecutor getJS(){
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		return js;
 	}
 }

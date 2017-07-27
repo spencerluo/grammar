@@ -26,15 +26,28 @@ public class RuleModule {
 			String result = getText("mainPage", "subMsg");
 			Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		}
-		click("mainPage", "subMsgClose");
-		if (!msg.equals("提交成功!")) {
-			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-		}
 //		Thread.sleep(1000);
 	}
 
 	public static void addRule(String name, String content) throws Exception {
 		addRule(name, content, null);
+	}
+	
+	public static void addRuleError(String name, String content, String msg) throws Exception {
+		waitBeClick("mainPage", "rule");
+		waitAndClick("rulePage", "add");
+		sendKeys("rulePage", "name", name);
+		sendKeys("rulePage", "content", content);
+		click("rulePage", "submit");
+		Thread.sleep(500);
+		String result = null;
+		try {
+			result = getText("rulePage", "titleErrorMsg");
+		} catch (Exception e) {
+			result = getText("rulePage", "contentErrorMsg");
+		}
+		Assert.assertTrue(result.equals(msg), "expect [" + msg + "] but [" + result + "]");
+//		Thread.sleep(1000);
 	}
 
 	public static void changeRule(String name, String content, String msg) throws Exception {
@@ -48,10 +61,6 @@ public class RuleModule {
 		Thread.sleep(500);
 		String result = getText("mainPage", "subMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
-		click("mainPage", "subMsgClose");
-		if (!msg.equals("提交成功!")) {
-			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-		}
 //		Thread.sleep(1000);
 	}
 
@@ -70,10 +79,6 @@ public class RuleModule {
 		Thread.sleep(500);
 		String result = getText("mainPage", "subMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
-		click("mainPage", "subMsgClose");
-		if (!msg.equals("提交成功!")) {
-			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-		}
 //		Thread.sleep(1000);
 	}
 
@@ -86,7 +91,6 @@ public class RuleModule {
 		Thread.sleep(500);
 		String result = getText("rulePage", "deleteMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
-		click("rulePage", "deleteMsgClose");
 //		Thread.sleep(1000);
 	}
 }

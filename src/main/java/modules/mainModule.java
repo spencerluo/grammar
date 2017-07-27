@@ -3,6 +3,7 @@ package modules;
 import static modules.GrammarModule.*;
 import static modules.AppModule.*;
 import static modules.RuleModule.addRule;
+import static modules.RuleModule.addRuleError;
 import static modules.RuleModule.changeRule;
 import static modules.RuleModule.changeChangeRule;
 import static modules.RuleModule.deleteRule;
@@ -32,6 +33,9 @@ public class mainModule {
 			switch (action) {
 			case "add":
 				addRule(name, content, msg);
+				break;
+			case "addError":
+				addRuleError(name, content, msg);
 				break;
 			case "change":
 				changeRule(name, content, msg);
@@ -113,6 +117,9 @@ public class mainModule {
 			switch (action) {
 			case "add":
 				addGrammar(name, content, corpus, answer, msg);
+				break;
+			case "addError":
+				addGrammarError(name, content, corpus, answer, msg);
 				break;
 			case "addChange":
 				addChangeGrammar(name, content, corpus, answer, msg);

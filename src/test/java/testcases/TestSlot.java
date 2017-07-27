@@ -18,10 +18,9 @@ public class TestSlot {
 	public void testSlot(String caseName, String function, String action, String test) throws Exception {
 		try {
 			process(function, action, test);
-		} catch (Exception e) {
+		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-			Thread.sleep(2000);
-			throw e;
+			Thread.sleep(1000);
 		}
 	}
 

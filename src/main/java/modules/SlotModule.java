@@ -26,10 +26,6 @@ public class SlotModule {
 			String result = getText("mainPage", "subMsg");
 			Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		}
-		click("mainPage", "subMsgClose");
-		if (!msg.equals("提交成功!")) {
-			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-		}
 //		Thread.sleep(1000);
 	}
 
@@ -54,10 +50,6 @@ public class SlotModule {
 			String result = getText("mainPage", "subMsg");
 			Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
 		}
-		click("mainPage", "subMsgClose");
-		if (!msg.equals("提交成功!")) {
-			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-		}
 //		Thread.sleep(1000);
 	}
 
@@ -79,10 +71,6 @@ public class SlotModule {
 		Thread.sleep(500);
 		String result = getText("mainPage", "subMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
-		click("mainPage", "subMsgClose");
-		if (!msg.equals("提交成功!")) {
-			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-		}
 //		Thread.sleep(1000);
 	}
 
@@ -108,10 +96,6 @@ public class SlotModule {
 		Thread.sleep(500);
 		String result = getText("mainPage", "subMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
-		click("mainPage", "subMsgClose");
-		if (!msg.equals("提交成功!")) {
-			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
-		}
 //		Thread.sleep(1000);
 	}
 
@@ -124,7 +108,6 @@ public class SlotModule {
 		Thread.sleep(500);
 		String result = getText("slotPage", "deleteMsg");
 		Assert.assertTrue(result.contains(msg), "expect [" + msg + "] but [" + result + "]");
-		click("slotPage", "deleteMsgClose");
 //		Thread.sleep(1000);
 	}
 }
