@@ -20,7 +20,7 @@ public class TestTemplate {
 	@Test(dataProvider = "dp")
 	  public void testTemplate(String caseName, String function, String action, String test) throws Exception {
 		try {
-			process(function, action, test);
+			process(caseName, function, action, test);
 		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			Thread.sleep(1000);

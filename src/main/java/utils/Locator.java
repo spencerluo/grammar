@@ -21,7 +21,7 @@ public class Locator {
 		dom=db.parse(new File("D:\\eclipse-jee-mars-1-win32-x86_64\\workspace\\grammar\\config\\element.xml"));
 	}
 
-	public static By getLocator(String pageName, String objectName) throws Exception {
+	public static By getLocator(String pageName, String objectName) {
 		NodeList pages;
 		try {
 			pages = dom.getElementsByTagName(pageName);

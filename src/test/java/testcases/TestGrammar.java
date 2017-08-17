@@ -9,20 +9,20 @@ import static modules.GrammarModule.quickAddSlot;
 import static modules.GrammarModule.quickAddTemplate;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import utils.Actions;
 import utils.ReadExcel;
 
 public class TestGrammar {
 	@Test(dataProvider = "grammar", priority = 1, enabled=true)
 	public void testGrammar(String caseName, String function, String action, String test) throws Exception {
 		try {
-			process(function, action, test);
+			process(caseName, function, action, test);
 		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			Thread.sleep(1000);
@@ -34,18 +34,23 @@ public class TestGrammar {
 		try {
 			waitBeClick("mainPage", "grammar");
 			waitAndClick("grammarPage", "add");
-			quickAddRule("r1", "r1", "提交成功!");
+			Thread.sleep(2000);
+			quickAddRule("r1", "r1");
+			waitElement("mainPage", "subMsg");
+			Thread.sleep(200);
+			String result1 = getText("mainPage", "subMsg");
+			Actions.assertTrue(result1.contains("提交成功!"), "expect [提交成功!] but [" + result1 + "]", "grammar_testQuickAddEditRule1");
 			Thread.sleep(6000);
 			sendKeys("grammarPage", "content", "<r1");
-			click("grammarPage", "quickEdit");
+			waitBeClick("grammarPage", "quickEdit");
 			Thread.sleep(1000);
 			clear("rulePage", "content");
 			sendKeys("rulePage", "content", "r2");
 			click("rulePage", "submit");
 			waitElement("mainPage", "subMsgClose");
-			Thread.sleep(500);
-			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains("提交成功!"), "expect [提交成功!] but [" + result + "]");
+			Thread.sleep(200);
+			String result2 = getText("mainPage", "subMsg");
+			Actions.assertTrue(result2.contains("提交成功!"), "expect [提交成功!] but [" + result2 + "]", "grammar_testQuickAddEditRule2");
 		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			Thread.sleep(1000);
@@ -57,17 +62,22 @@ public class TestGrammar {
 		try {
 			waitBeClick("mainPage", "grammar");
 			waitAndClick("grammarPage", "add");
-			quickAddSlot("s1", "datetime", "null", "1", "20", "提交成功!");
+			Thread.sleep(2000);
+			quickAddSlot("s1", "datetime", "null", "1", "20");
+			waitElement("mainPage", "subMsg");
+			Thread.sleep(200);
+			String result1 = getText("mainPage", "subMsg");
+			Actions.assertTrue(result1.contains("提交成功!"), "expect [提交成功!] but [" + result1 + "]", "grammar_testQuickAddEditSlot1");
 			Thread.sleep(6000);
 			sendKeys("grammarPage", "content", "<s1");
-			click("grammarPage", "quickEdit");
+			waitBeClick("grammarPage", "quickEdit");
 			Thread.sleep(1000);
 			click("slotPage", "internal");
 			click("slotPage", "submit");
 			waitElement("mainPage", "subMsgClose");
-			Thread.sleep(500);
-			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains("提交成功!"), "expect [提交成功!] but [" + result + "]");
+			Thread.sleep(200);
+			String result2 = getText("mainPage", "subMsg");
+			Actions.assertTrue(result2.contains("提交成功!"), "expect [提交成功!] but [" + result2 + "]", "grammar_testQuickAddEditSlot2");
 		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			Thread.sleep(1000);
@@ -79,18 +89,23 @@ public class TestGrammar {
 		try {
 			waitBeClick("mainPage", "grammar");
 			waitAndClick("grammarPage", "add");
-			quickAddTemplate("t1", "[=s=]t1$(s)", "提交成功!");
+			Thread.sleep(2000);
+			quickAddTemplate("t1", "[=s=]t1$(s)");
+			waitElement("mainPage", "subMsg");
+			Thread.sleep(200);
+			String result1 = getText("mainPage", "subMsg");
+			Actions.assertTrue(result1.contains("提交成功!"), "expect [提交成功!] but [" + result1 + "]", "grammar_testQuickAddEditTemplate1");
 			Thread.sleep(6000);
 			sendKeys("grammarPage", "content", "<t1");
-			click("grammarPage", "quickEdit");
+			waitBeClick("grammarPage", "quickEdit");
 			Thread.sleep(1000);
 			clear("templatePage", "content");
 			sendKeys("templatePage", "content", "[=s=]t2$(s)");
 			click("templatePage", "submit");
 			waitElement("mainPage", "subMsgClose");
-			Thread.sleep(500);
-			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains("提交成功!"), "expect [提交成功!] but [" + result + "]");
+			Thread.sleep(200);
+			String result2 = getText("mainPage", "subMsg");
+			Actions.assertTrue(result2.contains("提交成功!"), "expect [提交成功!] but [" + result2 + "]", "grammar_testQuickAddEditTemplate2");
 		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			Thread.sleep(1000);
@@ -112,9 +127,9 @@ public class TestGrammar {
 			getJS().executeScript("document.getElementsByName('grammarAnswer')[2].innerHTML='answer3'");
 			click("grammarPage", "submit");
 			waitElement("mainPage", "subMsgClose");
-			Thread.sleep(500);
+			Thread.sleep(200);
 			String result = getText("mainPage", "subMsg");
-			Assert.assertTrue(result.contains("提交成功!"), "expect [ 提交成功!] but [" + result + "]");
+			Actions.assertTrue(result.contains("提交成功!"), "expect [ 提交成功!] but [" + result + "]", "grammar_testNumberOfAnswer1");
 		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			Thread.sleep(2000);
@@ -123,7 +138,7 @@ public class TestGrammar {
 		String answer1 = getDriver().findElement(By.xpath("//*[@title='answers']/following-sibling::*[2]/span/div[1]")).getText();
 		String answer2 = getDriver().findElement(By.xpath("//*[@title='answers']/following-sibling::*[2]/span/div[2]")).getText();
 		String answer3 = getDriver().findElement(By.xpath("//*[@title='answers']/following-sibling::*[2]/span/div[3]")).getText();
-		Assert.assertTrue(answer1.equals("answer1")&answer2.equals("answer2")&answer3.equals("answer3"));
+		Actions.assertTrue(answer1.equals("answer1")&answer2.equals("answer2")&answer3.equals("answer3"),"don't contains answer", "grammar_testNumberOfAnswer2");
 
 	}
 
@@ -142,9 +157,9 @@ public class TestGrammar {
 		clear("loginPage", "question");
 		sendKeys("loginPage", "question", question);
 		click("loginPage", "testSubmit");
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		String answer = getValue("loginPage", "answer");
-		Assert.assertEquals(answer, result);
+		Actions.assertTrue(answer.equals(result), "grammar_"+question);
 	}
 
 	@BeforeClass

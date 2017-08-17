@@ -8,9 +8,12 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +23,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class Actions {
 
@@ -63,14 +67,9 @@ public class Actions {
 		}
 	}
 
-	public static WebElement getElement(String pageName, String objectName) throws Exception {
+	public static WebElement getElement(String pageName, String objectName){
 		WebElement element = null;
-		try {
-			element = driver.findElement(Locator.getLocator(pageName, objectName));
-		} catch (Exception e) {
-			Log.error("can't locate [" + objectName + "] in [" + pageName + "]");
-			throw new Exception("can't locate [" + objectName + "] in [" + pageName + "]");
-		}
+		element = driver.findElement(Locator.getLocator(pageName, objectName));
 		return element;
 	}
 
@@ -80,9 +79,14 @@ public class Actions {
 			element = getElement(pageName, objectName);
 			element.click();
 			Log.info("click [" + objectName + "] in [" + pageName + "]");
-		} catch (Exception e) {
-			Log.error("can't click [" + objectName + "] in [" + pageName + "]");
-			throw new Exception("can't click [" + objectName + "] in [" + pageName + "]");
+		} catch (NoSuchElementException e) {
+			Log.error("can't locate [" + objectName + "] in [" + pageName + "]");
+			takeScreenShot("locateError_"+objectName+"_"+pageName);
+			throw new Exception("can't locate [" + objectName + "] in [" + pageName + "]");
+		}catch (ElementNotVisibleException e) {
+			Log.error("[" + objectName + "] in [" + pageName + "] not visible");
+			takeScreenShot("visibleError_"+objectName+"_"+pageName);
+			throw new Exception("[" + objectName + "] in [" + pageName + "] not visible");
 		}
 	}
 
@@ -90,7 +94,8 @@ public class Actions {
 		try {
 			new WebDriverWait(driver, 10)
 					.until(ExpectedConditions.presenceOfElementLocated(Locator.getLocator(pageName, objectName)));
-		} catch (Exception e) {
+		} catch (TimeoutException e) {
+			takeScreenShot("timeoutError_"+objectName+"_"+pageName);
 			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at 10s");
 		}
 		click(pageName, objectName);
@@ -114,6 +119,7 @@ public class Actions {
 				}
 			});
 		} catch (Exception e) {
+			takeScreenShot("timeoutError_"+objectName+"_"+pageName);
 			throw new Exception("[" + objectName + "] in [" + pageName + "] can't be click at 10s");
 		}
 	}
@@ -121,6 +127,7 @@ public class Actions {
 	public static void clickAndSwitch(String pageName, String objectName) throws Exception {
 		String currentHandle = getDriver().getWindowHandle();
 		click(pageName, objectName);
+		Thread.sleep(2000);
 		Set<String> handles = driver.getWindowHandles();
 		for (String handle : handles) {
 			if (!handle.equals(currentHandle)) {
@@ -152,6 +159,7 @@ public class Actions {
 			Log.info("clear [" + objectName + "] in [" + pageName + "]");
 		} catch (Exception e) {
 			Log.error("can't clear [" + objectName + "] in [" + pageName + "]");
+			takeScreenShot("clearError_"+objectName+"_"+pageName);
 			throw new Exception("can't clear [" + objectName + "] in [" + pageName + "]");
 		}
 	}
@@ -161,9 +169,10 @@ public class Actions {
 			getElement(pageName, objectName).sendKeys(data);
 			;
 			Log.info("send [" + data + "] to [" + objectName + "] in [" + pageName + "]");
-		} catch (Exception e) {
-			Log.error("can't send [" + data + "] to [" + objectName + "] in [" + pageName + "]");
-			throw new Exception("can't send [" + data + "] to [" + objectName + "] in [" + pageName + "]");
+		} catch (NoSuchElementException e) {
+			Log.error("can't locate [" + objectName + "] in [" + pageName + "]");
+			takeScreenShot("sendKeyError_"+objectName+"_"+pageName);
+			throw new Exception("can't locate [" + objectName + "] in [" + pageName + "]");
 		}
 	}
 
@@ -179,6 +188,7 @@ public class Actions {
 			Log.info("switch to the frame [" + objectName + "] in [" + pageName + "]");
 		} catch (Exception e) {
 			Log.error("can't switch to the frame [" + objectName + "] in [" + pageName + "]");
+			takeScreenShot("switchFrameError_"+objectName+"_"+pageName);
 			throw new Exception("can't switch to the frame [" + objectName + "] in [" + pageName + "]");
 		}
 	}
@@ -205,15 +215,14 @@ public class Actions {
 		File file = tss.getScreenshotAs(OutputType.FILE);
 		String date = getDate();
 		try {
-			FileUtils.copyFile(file, new File("photos\\" + name + "_" + date + ".png"));
+			FileUtils.copyFile(file, new File("photos\\" + date + "\\" + name + ".png"));
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
 	public static String getDate() {
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String s = sdf.format(date);
 		return s;
 	}
@@ -245,11 +254,15 @@ public class Actions {
 	}
 
 	public static void waitElement(String pageName, String objectName) throws Exception {
+		waitElement(pageName, objectName, 10);
+	}
+	
+	public static void waitElement(String pageName, String objectName, int time) throws Exception{
 		try {
-			new WebDriverWait(driver, 10)
+			new WebDriverWait(driver, time)
 					.until(ExpectedConditions.presenceOfElementLocated(Locator.getLocator(pageName, objectName)));
 		} catch (Exception e) {
-			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at 10s");
+			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at "+time+"s");
 		}
 	}
 	
@@ -262,5 +275,19 @@ public class Actions {
 	public static JavascriptExecutor getJS(){
 		JavascriptExecutor js=(JavascriptExecutor)driver;
 		return js;
+	}
+	
+	public static void assertTrue(boolean condition, String message, String name){
+		if(condition == false){
+			takeScreenShot(name);
+		}
+		Assert.assertTrue(condition, message);
+	}
+	
+	public static void assertTrue(boolean condition, String name){
+		if(condition == false){
+			takeScreenShot(name);
+		}
+		Assert.assertTrue(condition);
 	}
 }

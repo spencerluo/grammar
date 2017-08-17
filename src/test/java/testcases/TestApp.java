@@ -1,9 +1,8 @@
 package testcases;
 
-import static modules.AppModule.createApp;
-import static modules.AppModule.enterApp;
 import static modules.LoginModule.login;
 import static modules.mainModule.process;
+import static utils.Actions.navigate;
 import static utils.Actions.openBrowser;
 import static utils.Actions.quite;
 
@@ -17,7 +16,12 @@ import utils.ReadExcel;
 public class TestApp {
   @Test(dataProvider="dp")
   public void testApp(String caseName, String function, String action, String test) throws Exception {
-	  process(function, action, test);
+	  try {
+		process(caseName, function, action, test);
+	} finally {
+		navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
+		Thread.sleep(1000);
+	}
   }
   
 	@BeforeClass

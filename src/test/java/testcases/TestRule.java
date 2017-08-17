@@ -5,22 +5,14 @@ import static modules.AppModule.deleteApp;
 import static modules.AppModule.enterApp;
 import static modules.LoginModule.login;
 import static modules.mainModule.process;
-import static utils.Actions.click;
-import static utils.Actions.navigate;
-import static utils.Actions.openBrowser;
-import static utils.Actions.quite;
-import static utils.Actions.sendKeys;
-import static utils.Actions.getDriver;
-import static utils.Actions.waitAndClick;
-import static utils.Actions.waitBeClick;
+import static utils.Actions.*;
 
-import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import utils.Actions;
 import utils.ReadExcel;
 
 public class TestRule {
@@ -28,7 +20,7 @@ public class TestRule {
 	@Test(dataProvider = "dp",priority=1)
 	public void testRule(String caseName, String function, String action, String test) throws Exception {
 		try {
-			process(function, action, test);
+			process(caseName, function, action, test);
 		} finally {
 			navigate("http://portal.olavoice.com/open/nli/web/search_grammar");
 			Thread.sleep(1000);
@@ -50,8 +42,7 @@ public class TestRule {
 		sendKeys("rulePage", "searchBox", "_nihao");
 		click("rulePage", "searchSubmit");
 		Thread.sleep(1000);
-		String result = getDriver().findElement(By.xpath("//*[@id='subform']/div[2]/table/tbody/tr/td[4]/span/span")).getText();
-		Assert.assertTrue(result.equals("_nihao"));
+		Actions.assertTrue(getPageSource().contains("_nihao"),"rule_searchRule");
 	}
 	
 	@BeforeClass
