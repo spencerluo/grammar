@@ -101,7 +101,7 @@ public class mainModule {
 			case "delete":
 				deleteTemplate(name);
 				waitElement("templatePage", "deleteMsg");
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				result = getText("templatePage", "deleteMsg");
 				break;
 			default:
@@ -169,7 +169,7 @@ public class mainModule {
 			case "delete":
 				deleteSlot(name);
 				waitElement("slotPage", "deleteMsg");
-				Thread.sleep(2500);
+				Thread.sleep(3000);
 				result = getText("slotPage", "deleteMsg");
 				break;
 			default:
@@ -242,6 +242,7 @@ public class mainModule {
 			case "add":
 				createApp(name);
 				waitElement("modelPage", "closeAddNotice");
+				Thread.sleep(500);
 				result = getText("mainPage", "subMsg");
 				break;
 			case "addError":
@@ -252,6 +253,7 @@ public class mainModule {
 			case "import":
 				importApp(name);
 				waitElement("mainPage", "subMsgClose",20);
+				Thread.sleep(500);
 				result = getText("mainPage", "subMsg");
 				break;
 			case "delete":
