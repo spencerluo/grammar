@@ -35,7 +35,7 @@ public class TestCite {
 		switchTo();
 		waitAndClick("loginPage", "user");
 		waitAndClick("loginPage", "应用管理");
-		configureModules("app5");
+		configureModules("app5", "100");
 		waitAndClick("loginPage", "test");
 	}
 	

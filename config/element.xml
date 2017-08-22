@@ -11,7 +11,7 @@
 		<应用管理 type="linkText" value="应用管理" />
 		<test type="xpath" value="/html/body/div[6]/div[5]/div/div[3]/div/div[1]/button[2]" />
 		<配置模块 type="xpath" value="/html/body/div[6]/div[5]/div/div[3]/div/div[1]/button[1]" />
-		<configureSubmit type="xpath" value='//*[@id="layui-layer1"]/div[3]/a[1]' />
+		<configureSubmit type="xpath" value='//*[contains(@id,"layui-layer")]/div[3]/a[1]' />
 		<question type="xpath" value='//*[@id="configApp1"]/form/table/tbody/tr[1]/td[2]/input' />
 		<testSubmit type="xpath" value='//*[@id="btn_test_do"]' />
 		<answer type="xpath" value='//*[@id="test_result"]' />
