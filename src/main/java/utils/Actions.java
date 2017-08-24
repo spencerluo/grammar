@@ -25,6 +25,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import io.qameta.allure.Attachment;
+
 public class Actions {
 
 	private static WebDriver driver;
@@ -81,11 +83,11 @@ public class Actions {
 			Log.info("click [" + objectName + "] in [" + pageName + "]");
 		} catch (NoSuchElementException e) {
 			Log.error("can't locate [" + objectName + "] in [" + pageName + "]");
-			takeScreenShot("locateError_"+objectName+"_"+pageName);
+			takeScreenShot();
 			throw new Exception("can't locate [" + objectName + "] in [" + pageName + "]");
 		}catch (ElementNotVisibleException e) {
 			Log.error("[" + objectName + "] in [" + pageName + "] not visible");
-			takeScreenShot("visibleError_"+objectName+"_"+pageName);
+			takeScreenShot();
 			throw new Exception("[" + objectName + "] in [" + pageName + "] not visible");
 		}
 	}
@@ -95,7 +97,7 @@ public class Actions {
 			new WebDriverWait(driver, 10)
 					.until(ExpectedConditions.presenceOfElementLocated(Locator.getLocator(pageName, objectName)));
 		} catch (TimeoutException e) {
-			takeScreenShot("timeoutError_"+objectName+"_"+pageName);
+			takeScreenShot();
 			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at 10s");
 		}
 		click(pageName, objectName);
@@ -119,7 +121,7 @@ public class Actions {
 				}
 			});
 		} catch (Exception e) {
-			takeScreenShot("timeoutError_"+objectName+"_"+pageName);
+			takeScreenShot();
 			throw new Exception("[" + objectName + "] in [" + pageName + "] can't be click at 10s");
 		}
 	}
@@ -150,7 +152,12 @@ public class Actions {
 
 	public static void clickByXpath(String xpath) {
 		new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
-		driver.findElement(By.xpath(xpath)).click();
+		try {
+			driver.findElement(By.xpath(xpath)).click();
+		} catch (Exception e) {
+			takeScreenShot();
+			e.printStackTrace();
+		}
 	}
 
 	public static void clear(String pageName, String objectName) throws Exception {
@@ -159,7 +166,7 @@ public class Actions {
 			Log.info("clear [" + objectName + "] in [" + pageName + "]");
 		} catch (Exception e) {
 			Log.error("can't clear [" + objectName + "] in [" + pageName + "]");
-			takeScreenShot("clearError_"+objectName+"_"+pageName);
+			takeScreenShot();
 			throw new Exception("can't clear [" + objectName + "] in [" + pageName + "]");
 		}
 	}
@@ -171,7 +178,7 @@ public class Actions {
 			Log.info("send [" + data + "] to [" + objectName + "] in [" + pageName + "]");
 		} catch (NoSuchElementException e) {
 			Log.error("can't locate [" + objectName + "] in [" + pageName + "]");
-			takeScreenShot("sendKeyError_"+objectName+"_"+pageName);
+			takeScreenShot();
 			throw new Exception("can't locate [" + objectName + "] in [" + pageName + "]");
 		}
 	}
@@ -188,7 +195,7 @@ public class Actions {
 			Log.info("switch to the frame [" + objectName + "] in [" + pageName + "]");
 		} catch (Exception e) {
 			Log.error("can't switch to the frame [" + objectName + "] in [" + pageName + "]");
-			takeScreenShot("switchFrameError_"+objectName+"_"+pageName);
+			takeScreenShot();
 			throw new Exception("can't switch to the frame [" + objectName + "] in [" + pageName + "]");
 		}
 	}
@@ -210,14 +217,10 @@ public class Actions {
 		return driver.getTitle();
 	}
 
-	public static void takeScreenShot(String name) {
+	@Attachment(value = "Page screenshot", type = "image/png")
+	public static byte[] takeScreenShot() {
 		TakesScreenshot tss = (TakesScreenshot) driver;
-		File file = tss.getScreenshotAs(OutputType.FILE);
-		String date = getDate();
-		try {
-			FileUtils.copyFile(file, new File("photos\\" + date + "\\" + name + ".png"));
-		} catch (IOException e) {
-		}
+		return tss.getScreenshotAs(OutputType.BYTES);
 	}
 
 	public static String getDate() {
@@ -262,6 +265,7 @@ public class Actions {
 			new WebDriverWait(driver, time)
 					.until(ExpectedConditions.presenceOfElementLocated(Locator.getLocator(pageName, objectName)));
 		} catch (Exception e) {
+			takeScreenShot();
 			throw new Exception("[" + objectName + "] in [" + pageName + "] don't appear at "+time+"s");
 		}
 	}
@@ -279,14 +283,14 @@ public class Actions {
 	
 	public static void assertTrue(boolean condition, String message, String name){
 		if(condition == false){
-			takeScreenShot(name);
+			takeScreenShot();
 		}
 		Assert.assertTrue(condition, message);
 	}
 	
 	public static void assertTrue(boolean condition, String name){
 		if(condition == false){
-			takeScreenShot(name);
+			takeScreenShot();
 		}
 		Assert.assertTrue(condition);
 	}
